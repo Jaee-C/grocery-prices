@@ -53,6 +53,7 @@ class SearchResult(BaseModel, abc.ABC):
 
 class Merchant(abc.ABC):
     _search_result: SearchResult
+    name: str
 
     def search(self, session: CachedSession, keyword: str, page: int = 1) -> SearchResult:
         logging.error(f"search() not implemented for {self.__class__.__name__}")
