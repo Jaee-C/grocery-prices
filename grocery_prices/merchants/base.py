@@ -38,25 +38,26 @@ class SearchResult(BaseModel, abc.ABC):
         """Preform any required preprocessing of API response to return list of product dictionaries."""
         pass
 
-    def from_response(self, raw: dict[str, Any], keyword: str):
+    @classmethod
+    def from_response(cls, raw: dict[str, Any], keyword: str):
         products = []
         results = SearchResult.preprocess_response(raw)
         for i, result in enumerate(results):
             try:
-                product = self._product(**result, index=i)
+                product = cls._product(**result, index=i)
                 products.append(product)
             except TypeError:
                 _logger.warning(f"ignoring product, could not parse: {result}", exc_info=True)
-        return SearchResult(products=products, raw=raw, keyword=keyword)
+        return cls(products=products, raw=raw, keyword=keyword)
 
 
 class Merchant(abc.ABC):
     _search_result: SearchResult
 
-    def search(self, session: CachedSession, keyword: str, page: int = 1) -> list[Product]:
+    def search(self, session: CachedSession, keyword: str, page: int = 1) -> SearchResult:
         logging.error(f"search() not implemented for {self.__class__.__name__}")
         response = self._search(session, keyword, page)
-        return self._search_result(self._search_result.from_response(response), keyword, response)
+        return self._search_result.from_response(response)
 
     @staticmethod
     @abc.abstractmethod

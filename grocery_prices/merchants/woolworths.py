@@ -9,6 +9,8 @@ from . import base
 
 _logger = logging.getLogger(__name__)
 
+NAME = "woolworths"
+
 
 class Product(base.Product):
     @model_validator
@@ -61,7 +63,7 @@ class Product(base.Product):
         return values
 
 
-class SearchResult(base.SearchResult):
+class WoolworthsResult(base.SearchResult):
     products: list[Product]
 
     @staticmethod
@@ -75,6 +77,7 @@ class SearchResult(base.SearchResult):
 
 class Woolworths(base.Merchant):
     _session_id: int = 0
+    name = NAME
 
     @staticmethod
     def _search(session: CachedSession, keyword: str, page: int = 1):
@@ -93,9 +96,12 @@ class Woolworths(base.Merchant):
             "SearchTerm": keyword,
             "SortType": "TraderRelevance",
         }
+
+        _logger.info(f"[{NAME}] searching keyword={keyword}")
         response = session.post(url=url, json=body)
         if not response.from_cache:
             _logger.debug(f"cache='miss' keyword={keyword} merchant=woolworths")
+        _logger.info(f"[{NAME}] response status={response.status_code}")
 
         return response.json()
 
