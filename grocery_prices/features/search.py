@@ -31,6 +31,7 @@ class SearchByCode:
 
     def __init__(self, code: str, merchant: str, session: CachedSession | None = None):
         self.code = code
+        self.merchant = merchant
         self._session = session or new_session()
 
         self.result: base.Product | None = None

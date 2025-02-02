@@ -19,6 +19,7 @@ class Product(BaseModel):
     is_on_special: bool
     label: str | None  # discount labelling, e.g. '20% Off save $1.40'
     url: AnyHttpUrl
+    code: str
 
 
 class SearchResult(BaseModel, abc.ABC):

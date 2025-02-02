@@ -61,6 +61,7 @@ class WoolworthsProduct(base.Product):
                 is_on_special=is_on_special,
                 label=label,
                 url=f"https://www.woolworths.com.au/shop/productdetails/{values['Stockcode']}/{values['UrlFriendlyName']}",
+                code=values["Stockcode"],
             )
         )
         return values
