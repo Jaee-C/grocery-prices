@@ -12,9 +12,12 @@ _logger = logging.getLogger(__name__)
 NAME = "woolworths"
 
 
-class Product(base.Product):
-    @model_validator
-    def _preprocess(self, values: dict[str, Any]) -> dict[str, Any]:
+class WoolworthsProduct(base.Product):
+    """Represents a Woolworths product."""
+
+    @model_validator(mode="before")
+    @classmethod
+    def _preprocess(cls, values: dict[str, Any]) -> dict[str, Any]:
         # Get metadata for determining offer type; e.g. member, standard pricing
         centre_tag = values["CentreTag"]
         is_member_offer = values["ImageTag"]["FallbackText"] == "Member Price"
@@ -64,7 +67,7 @@ class Product(base.Product):
 
 
 class WoolworthsResult(base.SearchResult):
-    products: list[Product]
+    """Woolworths search result."""
 
     @staticmethod
     def preprocess_response(raw: dict[str, Any]) -> list[dict[str, Any]]:
@@ -74,10 +77,17 @@ class WoolworthsResult(base.SearchResult):
             if (product := products["Products"][0]).get("ThirdPartyProductInfo") is None
         ]
 
+    @staticmethod
+    def _generate_product(raw: dict[str, Any], index: int) -> WoolworthsProduct:
+        return WoolworthsProduct(**raw, index=index)
+
 
 class Woolworths(base.Merchant):
+    """Use Woolworths API to search for products."""
+
     _session_id: int = 0
     name = NAME
+    _search_result: base.SearchResult = WoolworthsResult(keyword="", products=[], raw={})
 
     @staticmethod
     def _search(session: CachedSession, keyword: str, page: int = 1):
@@ -97,11 +107,11 @@ class Woolworths(base.Merchant):
             "SortType": "TraderRelevance",
         }
 
-        _logger.info(f"[{NAME}] searching keyword={keyword}")
+        _logger.info("[%s] searching keyword=%s", NAME, keyword)
         response = session.post(url=url, json=body)
         if not response.from_cache:
-            _logger.debug(f"cache='miss' keyword={keyword} merchant=woolworths")
-        _logger.info(f"[{NAME}] response status={response.status_code}")
+            _logger.debug("[%s] cache='miss' keyword=%s", NAME, keyword)
+        _logger.info("[%s] response status=%s", NAME, response.status_code)
 
         return response.json()
 
