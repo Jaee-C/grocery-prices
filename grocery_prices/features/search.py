@@ -1,9 +1,8 @@
 import logging
-
 from concurrent.futures import ThreadPoolExecutor
-from requests_cache import CachedSession
 
 import merchants.base
+from requests_cache import CachedSession
 from utils.session import new_session
 
 _logger = logging.getLogger(__name__)
