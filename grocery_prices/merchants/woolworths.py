@@ -112,6 +112,22 @@ class Woolworths(base.Merchant):
 
         return response.json()
 
+    def search_by_code(self, session: CachedSession, code: str) -> WoolworthsProduct:
+        # Initialise client
+        if Woolworths._session_id != id(session):
+            Woolworths._setup_session(session)
+
+        # Query merchant
+        url = f"https://www.woolworths.com.au/apis/ui/product/detail/{code}?isMobile=false&useVariant=true"
+
+        _logger.info("[%s] searching code=%s", NAME, code)
+        response = session.get(url=url)
+        if not response.from_cache:
+            _logger.debug("[%s] cache='miss' code=%s", NAME, code)
+        _logger.info("[%s] response status=%s", NAME, response.status_code)
+
+        return WoolworthsProduct(**response.json())
+
     @staticmethod
     def _setup_session(session: CachedSession):
         session.get(url="https://www.woolworths.com.au", refresh=True)

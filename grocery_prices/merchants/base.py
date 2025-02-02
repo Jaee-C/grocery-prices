@@ -62,9 +62,13 @@ class Merchant(abc.ABC):
     _search_result: SearchResult
     name: str
 
-    def search(self, session: CachedSession, keyword: str, page: int = 1) -> SearchResult:
+    def search_by_name(self, session: CachedSession, keyword: str, page: int = 1) -> SearchResult:
         response = self._search(session, keyword, page)
         return self._search_result.read_response(response, keyword)
+
+    @abc.abstractmethod
+    def search_by_code(self, session: CachedSession, code: str) -> Product:
+        pass
 
     @abc.abstractmethod
     def _search(self, session: CachedSession, keyword: str, page: int = 1) -> dict[str, Any]:

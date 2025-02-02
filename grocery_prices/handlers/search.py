@@ -1,9 +1,8 @@
 import logging
 
-from aws_lambda_powertools.utilities.typing import LambdaContext
 from pydantic import BaseModel
 
-from grocery_prices.features.search import Search
+from grocery_prices.features.search import SearchByName
 
 _logger = logging.getLogger(__name__)
 
@@ -13,7 +12,7 @@ class SearchEvent(BaseModel):
     page: int = 1
 
 
-def lambda_handler(event: SearchEvent, context: LambdaContext):
-    search_result = Search(event.keyword)
+def lambda_handler(event: SearchEvent):
+    search_result = SearchByName(event.keyword)
 
-    _logger.info(f"found {len(search_result[0])} results for keyword={event.keyword}")
+    _logger.info("found %d results for keyword=%s", len(search_result.results[0]), event.keyword)
