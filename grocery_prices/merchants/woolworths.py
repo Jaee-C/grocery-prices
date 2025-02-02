@@ -69,16 +69,14 @@ class WoolworthsProduct(base.Product):
 class WoolworthsResult(base.SearchResult):
     """Woolworths search result."""
 
-    @staticmethod
-    def preprocess_response(raw: dict[str, Any]) -> list[dict[str, Any]]:
+    def preprocess_response(self, raw: dict[str, Any]) -> list[dict[str, Any]]:
         return [
             product
             for products in raw.pop("Products") or []
             if (product := products["Products"][0]).get("ThirdPartyProductInfo") is None
         ]
 
-    @staticmethod
-    def _generate_product(raw: dict[str, Any], index: int) -> WoolworthsProduct:
+    def _generate_product(self, raw: dict[str, Any], index: int) -> WoolworthsProduct:
         return WoolworthsProduct(**raw, index=index)
 
 
@@ -87,10 +85,9 @@ class Woolworths(base.Merchant):
 
     _session_id: int = 0
     name = NAME
-    _search_result: base.SearchResult = WoolworthsResult(keyword="", products=[], raw={})
+    _search_result: base.SearchResult = WoolworthsResult()
 
-    @staticmethod
-    def _search(session: CachedSession, keyword: str, page: int = 1):
+    def _search(self, session: CachedSession, keyword: str, page: int = 1):
         # Initialise client
         if Woolworths._session_id != id(session):
             Woolworths._setup_session(session)

@@ -22,9 +22,9 @@ class Product(BaseModel):
 
 
 class SearchResult(BaseModel, abc.ABC):
-    keyword: str
-    products: list[Annotated[Product, "Merchant's product"]]
-    raw: dict[str, Any]
+    keyword: str = ""
+    products: list[Annotated[Product, "Merchant's product"]] = []
+    raw: dict[str, Any] = {}
 
     def __iter__(self):
         return iter(self.products)
@@ -32,28 +32,30 @@ class SearchResult(BaseModel, abc.ABC):
     def __len__(self):
         return len(self.products)
 
-    @staticmethod
-    @abc.abstractmethod
-    def preprocess_response(raw: dict[str, Any]) -> list[dict[str, Any]]:
-        """Preform any required preprocessing of API response to return list of product dictionaries."""
-        pass
-
-    @staticmethod
-    def _generate_product(raw: dict[str, Any], index: int) -> Product:
-        """Generate a product from a dictionary of raw product data."""
-        pass
-
-    @classmethod
-    def from_response(cls, raw: dict[str, Any], keyword: str):
+    def read_response(self, raw: dict[str, Any], keyword: str):
+        """Generate a SearchResult from a raw API response."""
         products = []
-        results = cls.preprocess_response(raw)
+        results = self.preprocess_response(raw)
         for i, result in enumerate(results):
             try:
-                product = cls._generate_product(result, index=i)
+                product = self._generate_product(result, index=i)
                 products.append(product)
             except TypeError:
-                _logger.warning(f"ignoring product, could not parse: {result}", exc_info=True)
-        return cls(products=products, raw=raw, keyword=keyword)
+                _logger.warning("ignoring product, could not parse: %s", result, exc_info=True)
+
+        self.keyword = keyword
+        self.products = products
+        self.raw = raw
+
+        return self
+
+    @abc.abstractmethod
+    def preprocess_response(self, raw: dict[str, Any]) -> list[dict[str, Any]]:
+        """Preform any required preprocessing of API response to return list of product dictionaries."""
+
+    @abc.abstractmethod
+    def _generate_product(self, raw: dict[str, Any], index: int) -> Product:
+        """Generate a product from a dictionary of raw product data."""
 
 
 class Merchant(abc.ABC):
@@ -62,9 +64,8 @@ class Merchant(abc.ABC):
 
     def search(self, session: CachedSession, keyword: str, page: int = 1) -> SearchResult:
         response = self._search(session, keyword, page)
-        return self._search_result.from_response(response, keyword)
+        return self._search_result.read_response(response, keyword)
 
-    @staticmethod
     @abc.abstractmethod
-    def _search(session: CachedSession, keyword: str, page: int = 1) -> dict[str, Any]:
+    def _search(self, session: CachedSession, keyword: str, page: int = 1) -> dict[str, Any]:
         pass
