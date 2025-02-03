@@ -13,6 +13,7 @@ jobs:
   terraform:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
+    environment: production
     permissions:
       contents: read
       pull-requests: write
@@ -25,6 +26,13 @@ jobs:
         with:
           terraform_version: 1.8.2
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Assume AWS role
+        id: assume-role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.DEPLOYMENT_ROLE_ARN }}
+          aws-region: us-east-1
 
       - name: Terraform Format
         id: fmt
