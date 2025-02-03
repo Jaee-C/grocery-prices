@@ -1,0 +1,121 @@
+name: 'Terraform Plan'
+on:
+  pull_request:
+    branches:
+      - main
+
+
+defaults:
+  run:
+    working-directory: infra
+
+jobs:
+  terraform:
+    name: 'Terraform Plan'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -recursive -check=true -write=false -diff
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.2
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Mark repository as safe
+        shell: bash
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> "$GITHUB_ENV"
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: |
+          terraform validate -no-color | tee -a validate.log
+          output="$(cat validate.log)"
+          {
+            echo "stdout<<EOF"
+            echo "$output"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+          echo "warnings=$(grep -c 'warning' validate.log)" >> "$GITHUB_OUTPUT"
+
+      - name: Terraform Plan
+        id: plan
+        run: |
+          set +e
+          terraform plan -no-color -input=false -detailed-exitcode -out=tfplan
+          exitcode=$?
+          echo "TERRAFORM_EXITCODE=${exitcode}" >> "$GITHUB_ENV"
+          if [ $exitcode -ne 1 ]; then
+            echo "Terraform plan succeeded"
+            exit 0
+          else
+            echo "Terraform plan failed"
+            exit 1
+          fi
+
+      - name: Change Summary
+        uses: marocchino/sticky-pull-request-comment@v2.3.1
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          hide_and_recreate: true
+          hide_classify: "OUTDATED"
+          header: Change Summary
+          message: |
+            ## [View Run #${{ github.run_number }} ](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+            | Summary       | Result        |
+            | ------------- |:-------------:|
+            | 🚀 Run         | [View Run - ${{ env.SHORT_SHA }} / ${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
+            | 🖌 Format and Style  | ${{ steps.fmt.outcome == 'success' && '✅' || '❌'  }}  |
+            | ⚙️ Initialization  | ${{ steps.init.outcome == 'success' && '✅' || '❌'  }} |
+            | 🤖 Validation    | ${{ steps.validate.outcome == 'success' && '✅' || '❌'  }}  ${{ steps.validate.outputs.warnings > 0 && '⚠️' || '' }}  |
+            | 📖 Plan     | ${{ steps.plan.outcome == 'success' && '✅' || '❌'  }}    |
+
+            <details><summary>🤖 Validation Output ${{ steps.validate.outputs.warnings > 0 && '⚠️' || '' }}</summary>
+
+            ```hcl
+            ${{ steps.validate.outputs.stdout }}
+            ```
+
+            </details>
+
+            #### 📖Terraform Plan - ${{ steps.plan.outcome == 'success' && '✅' || '❌'  }}
+
+            <details><summary>Show Plan</summary>
+
+            ```hcl
+            ${{ steps.plan.outcome == 'success' && env.PLAN || '⚠️ Plan failed ⚠️' }}
+            ```
+            </details>
+
+            - [ ] Plan Reviewed
+
+            *Author: @${{ github.actor }}, Action: `${{ github.event_name }}`, Working Directory: `infra` , Workflow: `${{ github.workflow }}`*
+      - uses: actions/upload-artifact@v4
+        if: ${{ steps.plan.conclusion == 'success' }}
+        with:
+          name: terraform-log-${{ github.run_number }}
+          path: infra/plan.log
+          retention-days: 14
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ steps.plan.conclusion == 'success' }}
+        with:
+          name: terraform-plan-${{ github.run_number }}
+          path: infra/tfplan
+          retention-days: 14
