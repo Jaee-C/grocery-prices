@@ -25,9 +25,14 @@ resource "aws_iam_role" "grocery_lambda_execution_role" {
   assume_role_policy = data.aws_iam_policy_document.lambda_assume_role_policy.json
 }
 
+resource "aws_iam_policy" "execution_policy" {
+  name   = "grocery_lambda_execution_policy"
+  policy = data.aws_iam_policy_document.lambda_execution_policy.json
+}
+
 resource "aws_iam_role_policy_attachment" "grocery_lambda_execution_policy_attachment" {
   role       = aws_iam_role.grocery_lambda_execution_role.name
-  policy_arn = aws_iam_policy.kms_access_policy.arn
+  policy_arn = aws_iam_policy.execution_policy.arn
 }
 
 data "aws_iam_policy_document" "lambda_invoke_policy" {
@@ -37,7 +42,7 @@ data "aws_iam_policy_document" "lambda_invoke_policy" {
     actions = [
       "lambda:InvokeFunction"
     ]
-    resources = [aws_lambda_function.fetch_grocery_prices.arn]
+    resources = [module.lambdas.search_grocery_prices_arn]
   }
 }
 

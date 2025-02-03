@@ -1,6 +1,4 @@
 resource "aws_ecrpublic_repository" "grocery_prices" {
-  provider = aws.us_east_1
-
   repository_name = "grocery-prices"
 
   catalog_data {
