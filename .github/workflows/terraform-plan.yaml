@@ -20,15 +20,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Terraform Format
-        id: fmt
-        run: terraform fmt -recursive -check=true -write=false -diff
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.8.2
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -recursive -check=true -write=false -diff
 
       - name: Mark repository as safe
         shell: bash
