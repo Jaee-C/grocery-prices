@@ -76,6 +76,25 @@ jobs:
             exit 1
           fi
 
+      - name: Terraform show
+        id: show
+        if: steps.plan.conclusion == 'success'
+        shell: bash
+        env:
+          TF_IN_AUTOMATION: "true"
+        run: |
+          terraform show -no-color tfplan | tee -a plan.log
+          {
+            echo "PLAN<<EOF"
+            head -c 100000 plan.log
+            file_size=$(wc -m < "plan.log")
+            if [ "$file_size" -gt 100000 ]
+            then
+              printf "\n\n ... Source truncated due to length - please check logs ... \n\n"
+            fi
+            echo "EOF"
+          } >> "$GITHUB_ENV"
+
       - name: Change Summary
         uses: marocchino/sticky-pull-request-comment@v2.3.1
         if: ${{ github.event_name == 'pull_request' }}
