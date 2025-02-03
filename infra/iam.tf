@@ -26,7 +26,7 @@ resource "aws_iam_role" "grocery_lambda_execution_role" {
 }
 
 resource "aws_iam_policy" "execution_policy" {
-  name = "grocery_lambda_execution_policy"
+  name   = "grocery_lambda_execution_policy"
   policy = data.aws_iam_policy_document.lambda_execution_policy.json
 }
 
