@@ -20,6 +20,7 @@ jobs:
     uses: ./.github/workflows/terraform-plan.yaml
     with:
       environment: production
+    secrets: inherit
 
   deploy:
     if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
