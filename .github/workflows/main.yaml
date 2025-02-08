@@ -1,0 +1,24 @@
+name: "Grocery Prices Workflow"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    uses: ./.github/workflows/build-and-test.yaml
+
+  terraform-plan:
+    uses: ./.github/workflows/terraform-plan.yaml
+
+  terraform-apply:
+    if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+    needs: terraform-plan
+    uses: ./.github/workflows/terraform-apply.yaml
+    with:
+      environment: production
+      aws-region: us-east-1

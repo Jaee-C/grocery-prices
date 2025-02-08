@@ -1,9 +1,6 @@
 name: 'Terraform Plan'
 on:
-  pull_request:
-    branches:
-      - main
-
+  workflow_call:
 
 defaults:
   run:
@@ -13,7 +10,6 @@ jobs:
   terraform:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
-    environment: production
     permissions:
       id-token: write
       contents: read
