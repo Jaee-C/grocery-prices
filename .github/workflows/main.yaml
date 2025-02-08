@@ -22,9 +22,17 @@ jobs:
       environment: production
     secrets: inherit
 
+  prod-approval:
+    if: ${{ github.ref_name == 'main' }}
+    runs-on: ubuntu-latest
+    needs: [terraform-plan, build-and-test]
+    environment: prod-approval
+    steps:
+     - run: echo "Production approval."
+
   deploy:
     if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
-    needs: [terraform-plan, build-and-test]
+    needs: [prod-approval]
     permissions:
       id-token: write
       contents: read
