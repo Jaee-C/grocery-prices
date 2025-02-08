@@ -13,11 +13,18 @@ jobs:
     uses: ./.github/workflows/build-and-test.yaml
 
   terraform-plan:
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
     uses: ./.github/workflows/terraform-plan.yaml
 
   terraform-apply:
     if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
     needs: terraform-plan
+    permissions:
+      id-token: write
+      contents: read
     uses: ./.github/workflows/terraform-apply.yaml
     with:
       environment: production
