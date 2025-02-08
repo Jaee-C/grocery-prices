@@ -31,12 +31,12 @@ resource "aws_dynamodb_table" "grocery_prices" {
   }
 
   global_secondary_index {
-    name = "product_type_index"
-    hash_key = "product_type"
-    range_key = "date"
-    projection_type = "INCLUDE"
-    write_capacity = 5
-    read_capacity = 5
+    name               = "product_type_index"
+    hash_key           = "product_type"
+    range_key          = "date"
+    projection_type    = "INCLUDE"
+    write_capacity     = 5
+    read_capacity      = 5
     non_key_attributes = ["price"]
   }
 }
