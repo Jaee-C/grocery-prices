@@ -21,7 +21,7 @@ jobs:
 
   terraform-apply:
     if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
-    needs: terraform-plan
+    needs: [terraform-plan, build-and-test]
     permissions:
       id-token: write
       contents: read
