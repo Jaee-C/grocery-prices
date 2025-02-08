@@ -12,6 +12,7 @@ class GroceryItemInput(BaseModel):
 
 
 _logger = logging.getLogger(__name__)
+_logger.setLevel("INFO")
 client = boto3.client("dynamodb")
 
 
