@@ -18,14 +18,16 @@ jobs:
       contents: read
       pull-requests: write
     uses: ./.github/workflows/terraform-plan.yaml
+    with:
+      environment: production
 
-  terraform-apply:
+  deploy:
     if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
     needs: [terraform-plan, build-and-test]
     permissions:
       id-token: write
       contents: read
-    uses: ./.github/workflows/terraform-apply.yaml
+    uses: ./.github/workflows/deploy.yaml
     with:
       environment: production
       aws-region: us-east-1
