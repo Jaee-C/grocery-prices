@@ -21,11 +21,6 @@ resource "aws_dynamodb_table" "grocery_prices" {
     type = "S"
   }
 
-  attribute {
-    name = "price"
-    type = "N"
-  }
-
   server_side_encryption {
     enabled = true
   }
