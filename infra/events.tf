@@ -1,7 +1,7 @@
 resource "aws_cloudwatch_event_rule" "fetch_grocery_prices" {
   name                = "fetch_grocery_prices"
   description         = "Fetch grocery prices every Wednesday"
-  schedule_expression = "cron(0 8 * * 4 *)"
+  schedule_expression = "cron(0 8 ? * 4 *)"
 }
 
 resource "aws_cloudwatch_event_target" "fetch_grocery_prices_target" {
