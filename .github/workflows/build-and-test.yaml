@@ -24,7 +24,6 @@ jobs:
       - name: Generate Lambda zip archive
         run: |
           poetry self add poetry-plugin-lambda-build
-          poetry self add poetry-plugin-export
           poetry build-lambda
 
       - name: Upload Artifact
