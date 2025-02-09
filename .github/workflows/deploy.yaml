@@ -48,9 +48,44 @@ jobs:
           docker tag ${{ env.IMAGE_NAME }} ${{ inputs.image-name }}
           docker push ${{ inputs.image-name }}
 
-      - name: Clean up old images (manual ECR lifecycle policy)
+  ecr-clean-up:
+    name: Clean up old ECR images
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    environment: ${{ inputs.environment }}
+    needs: push-to-ecr
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Assume AWS role
+        id: assume-role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.DEPLOYMENT_ROLE_ARN }}
+          aws-region: ${{ inputs.aws-region }}
+
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registry-type: public
+
+      - name: Set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
         run: |
-          python infra/scripts/purge_old_images.py
+          pip install poetry==2.0.1
+          poetry install
+
+      - name: Run script to clean up old images
+        run: poetry run python infra/scripts/purge_old_images.py
+
 
   terraform-apply:
     runs-on: ubuntu-latest

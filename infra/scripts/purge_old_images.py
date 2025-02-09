@@ -9,9 +9,9 @@ def get_old_images(ecr_client: ECRPublicClient, repository_name):
 
 
 def purge_old_images(ecr_client, repository_name, images):
-    ecr_client.batch_delete_image(
-        repositoryName=repository_name, imageIds=[{"imageDigest": image["imageDigest"]} for image in images]
-    )
+    images_to_delete = [{"imageDigest": image["imageDigest"]} for image in images]
+    print(f"Deleting impages: {images_to_delete}")
+    ecr_client.batch_delete_image(repositoryName=repository_name, imageIds=images_to_delete)
 
 
 def main():
