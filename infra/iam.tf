@@ -38,7 +38,7 @@ data "aws_iam_policy_document" "lambda_invoke_policy" {
     actions = [
       "lambda:InvokeFunction"
     ]
-    resources = [module.lambdas.search_grocery_prices_arn]
+    resources = [module.lambdas.save_price_lambda_arn]
   }
 }
 

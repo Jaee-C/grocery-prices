@@ -12,7 +12,7 @@ resource "aws_cloudwatch_event_target" "fetch_grocery_prices_target" {
 resource "aws_lambda_permission" "cloudwatch_events_invoke" {
   statement_id  = "AllowExecutionFromCloudWatch"
   action        = "lambda:InvokeFunction"
-  function_name = module.lambdas.search_grocery_prices_function_name
+  function_name = module.lambdas.save_price_lambda_name
   principal     = "events.amazonaws.com"
   source_arn    = aws_cloudwatch_event_rule.fetch_grocery_prices.arn
 }
