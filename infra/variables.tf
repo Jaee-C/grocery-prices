@@ -1,3 +1,4 @@
 variable "grocery_prices_image" {
-  type = string
+  type    = string
+  default = "test"
 }

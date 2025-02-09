@@ -1,0 +1,52 @@
+name: "Grocery Prices Workflow"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    uses: ./.github/workflows/build-and-test.yaml
+
+  terraform-plan:
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+    uses: ./.github/workflows/terraform-plan.yaml
+    with:
+      environment: production
+      aws-region: us-east-1
+    secrets: inherit
+
+  prod-approval:
+    if: ${{ github.ref_name == 'main' }}
+    runs-on: ubuntu-latest
+    needs: [terraform-plan, build-and-test]
+    environment: prod-approval
+    steps:
+     - run: echo "Production approval."
+
+  generate-image-tag:
+    uses: ./.github/workflows/generate-tag.yaml
+    permissions:
+      id-token: write
+      contents: read
+    with:
+      aws-region: us-east-1
+
+  deploy:
+    if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+    needs: [prod-approval, generate-image-tag]
+    permissions:
+      id-token: write
+      contents: read
+    uses: ./.github/workflows/deploy.yaml
+    with:
+      environment: production
+      aws-region: us-east-1
+      image-name: ${{ needs.generate-image-tag.outputs.image-tag }}

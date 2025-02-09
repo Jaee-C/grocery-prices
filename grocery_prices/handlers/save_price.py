@@ -9,6 +9,7 @@ from grocery_prices.features.search import SearchByCode
 from grocery_prices.merchants.base import Product
 
 _logger = logging.getLogger(__name__)
+_logger.setLevel("INFO")
 client = boto3.client("dynamodb")
 
 
