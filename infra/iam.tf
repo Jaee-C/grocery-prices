@@ -25,14 +25,10 @@ resource "aws_iam_role" "grocery_lambda_execution_role" {
   assume_role_policy = data.aws_iam_policy_document.lambda_assume_role_policy.json
 }
 
-resource "aws_iam_policy" "execution_policy" {
-  name   = "grocery_lambda_execution_policy"
+resource "aws_iam_role_policy" "lambda_execution_policy" {
+  name   = "lambda_execution_policy"
+  role   = aws_iam_role.grocery_lambda_execution_role.id
   policy = data.aws_iam_policy_document.lambda_execution_policy.json
-}
-
-resource "aws_iam_role_policy_attachment" "grocery_lambda_execution_policy_attachment" {
-  role       = aws_iam_role.grocery_lambda_execution_role.name
-  policy_arn = aws_iam_policy.execution_policy.arn
 }
 
 data "aws_iam_policy_document" "lambda_invoke_policy" {
