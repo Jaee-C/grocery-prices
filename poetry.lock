@@ -93,6 +93,7 @@ files = [
 [package.dependencies]
 botocore-stubs = "*"
 mypy-boto3-dynamodb = {version = ">=1.36.0,<1.37.0", optional = true, markers = "extra == \"dynamodb\""}
+mypy-boto3-ecr-public = {version = ">=1.36.0,<1.37.0", optional = true, markers = "extra == \"ecr-public\""}
 types-s3transfer = "*"
 
 [package.extras]
@@ -777,6 +778,18 @@ files = [
 ]
 
 [[package]]
+name = "mypy-boto3-ecr-public"
+version = "1.36.10"
+description = "Type annotations for boto3 ECRPublic 1.36.10 service generated with mypy-boto3-builder 8.9.0"
+optional = false
+python-versions = ">=3.8"
+groups = ["dev"]
+files = [
+    {file = "mypy_boto3_ecr_public-1.36.10-py3-none-any.whl", hash = "sha256:d5fd1d1036060abb850593ad4fe99aa40e14fa5ee8840c64dd4329717299e10b"},
+    {file = "mypy_boto3_ecr_public-1.36.10.tar.gz", hash = "sha256:79c73ae4132ae877e34fe808e8474dfb923361405ac13493f00adbc79f88e4e1"},
+]
+
+[[package]]
 name = "nodeenv"
 version = "1.9.1"
 description = "Node.js virtual environment builder"
@@ -1240,4 +1253,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.13"
-content-hash = "fd56a67e3ef87e0031857df9cb6db36c50875fa4a1bbf563e86fe935093d8c90"
+content-hash = "e63d1802d6038d45340c7472269e0f324d89c4cbef552275adcb3a1931d92f0b"

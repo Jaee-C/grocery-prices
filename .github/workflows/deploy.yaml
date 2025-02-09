@@ -48,6 +48,10 @@ jobs:
           docker tag ${{ env.IMAGE_NAME }} ${{ inputs.image-name }}
           docker push ${{ inputs.image-name }}
 
+      - name: Clean up old images (manual ECR lifecycle policy)
+        run: |
+          python infra/scripts/purge_old_images.py
+
   terraform-apply:
     runs-on: ubuntu-latest
     permissions:

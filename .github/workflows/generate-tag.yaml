@@ -43,7 +43,7 @@ jobs:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REGISTRY_ALIAS: e2q6m3r8
         run: |
-          IMAGE_TAG=$(bash generate_version.sh)
+          IMAGE_TAG=$(bash infra/scripts/generate_version.sh)
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
           echo $IMAGE_TAG
           echo "IMAGE_DESTINATION=${{ env.REGISTRY }}/${{ env.REGISTRY_ALIAS }}/${{ env.REPOSITORY }}:$IMAGE_TAG" >> $GITHUB_OUTPUT
