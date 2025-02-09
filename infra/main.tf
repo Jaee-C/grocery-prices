@@ -23,6 +23,5 @@ provider "aws" {
 module "lambdas" {
   source = "./lambdas"
 
-  grocery_prices_image = var.grocery_prices_image
-  execution_role_arn   = aws_iam_role.grocery_lambda_execution_role.arn
+  execution_role_arn = aws_iam_role.grocery_lambda_execution_role.arn
 }

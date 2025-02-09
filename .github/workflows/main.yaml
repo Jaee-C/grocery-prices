@@ -31,17 +31,9 @@ jobs:
     steps:
      - run: echo "Production approval."
 
-  generate-image-tag:
-    uses: ./.github/workflows/generate-tag.yaml
-    permissions:
-      id-token: write
-      contents: read
-    with:
-      aws-region: us-east-1
-
   deploy:
     if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
-    needs: [prod-approval, generate-image-tag]
+    needs: [prod-approval]
     permissions:
       id-token: write
       contents: read
@@ -49,5 +41,4 @@ jobs:
     with:
       environment: production
       aws-region: us-east-1
-      image-name: ${{ needs.generate-image-tag.outputs.image-tag }}
     secrets: inherit
