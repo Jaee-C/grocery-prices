@@ -1,19 +1,16 @@
 import logging
-import pathlib
 import shutil
 import sys
-import platformdirs
-import requests_cache
-
 from datetime import timedelta
+
+import requests_cache
 from requests import PreparedRequest, Response
 from requests.adapters import HTTPAdapter, Retry
 
 from .wednesday import get_next_wednesday
 
 _logger = logging.getLogger(__name__)
-_package_name, _ = __package__.split(".", 1)
-CACHE_LOCATION = pathlib.Path(platformdirs.user_cache_dir(_package_name))
+CACHE_LOCATION = "/tmp/http_cache"
 
 
 class DefaultTimeoutAdapter(HTTPAdapter):
@@ -28,9 +25,9 @@ class DefaultTimeoutAdapter(HTTPAdapter):
 
 def new_session() -> requests_cache.CachedSession:
     """Create a new CachedSession with a custom cache location."""
-    _logger.info(f"requests cache: {CACHE_LOCATION}")
+    _logger.info("requests cache: %s", CACHE_LOCATION)
     session = requests_cache.CachedSession(
-        CACHE_LOCATION / "requests",
+        CACHE_LOCATION,
         backend="filesystem",
         serializer="json",
         allowable_methods=["HEAD", "GET", "POST"],
