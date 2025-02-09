@@ -2,10 +2,10 @@ terraform {
   required_version = "~> 1.10"
 
   backend "s3" {
-    bucket         = "daniel-chin-terraform-state"
-    key            = "grocery_prices/terraform.tfstate"
-    region         = "us-east-1"
-    use_lockfile   = true
+    bucket       = "daniel-chin-terraform-state"
+    key          = "grocery_prices/terraform.tfstate"
+    region       = "us-east-1"
+    use_lockfile = true
   }
 
   required_providers {
