@@ -16,6 +16,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    environment: ${{ inputs.environment }}
     env:
       IMAGE_NAME: grocery-images
     steps:
