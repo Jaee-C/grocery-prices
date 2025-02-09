@@ -1,11 +1,11 @@
 terraform {
-  required_version = "~> 1.8.2"
+  required_version = "~> 1.10"
 
-  cloud {
-    organization = "daniel-personal-lab"
-    workspaces {
-      name = "grocery-prices"
-    }
+  backend "s3" {
+    bucket         = "daniel-chin-terraform-state"
+    key            = "grocery_prices/terraform.tfstate"
+    region         = "us-east-1"
+    use_lockfile   = true
   }
 
   required_providers {

@@ -6,5 +6,5 @@ resource "aws_lambda_function" "search_grocery_prices" {
   filename         = "../grocery_prices.zip"
   handler          = "grocery_prices/handlers/search.lambda_handler"
   runtime          = "python3.13"
-  memory_size      = 3000
+  memory_size      = 128
 }
