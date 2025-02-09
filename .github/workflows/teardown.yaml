@@ -3,6 +3,10 @@ name: Teardown infrastructure
 on:
   workflow_dispatch:
 
+defaults:
+  run:
+    working-directory: infra
+
 jobs:
   teardown:
     runs-on: ubuntu-latest
