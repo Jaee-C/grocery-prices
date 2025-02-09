@@ -24,6 +24,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: grocery_prices.zip
+          path: .
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
