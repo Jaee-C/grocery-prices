@@ -74,6 +74,7 @@ jobs:
 
       - name: Terraform Init
         id: init
+        working-directory: infra
         run: terraform init
 
       - name: Terraform Apply
