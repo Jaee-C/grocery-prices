@@ -16,7 +16,7 @@ def purge_old_images(ecr_client: ECRPublicClient, repository_name, images: list[
 
 def main():
     ecr_client = boto3.client("ecr-public")
-    repository_name = "my-repository"
+    repository_name = "grocery-prices"
     old_images = get_old_images(ecr_client, repository_name)
     purge_old_images(ecr_client, repository_name, old_images)
 
