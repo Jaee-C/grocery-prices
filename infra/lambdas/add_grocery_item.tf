@@ -4,7 +4,7 @@ resource "aws_lambda_function" "add_grocery_item" {
   package_type     = "Zip"
   source_code_hash = filebase64sha256("../grocery_prices.zip")
   filename         = "../grocery_prices.zip"
-  handler          = "grocery_prices/handlers/search.lambda_handler"
+  handler          = "grocery_prices/handlers/add_grocery_item.lambda_handler"
   runtime          = "python3.13"
   memory_size      = 128
 }

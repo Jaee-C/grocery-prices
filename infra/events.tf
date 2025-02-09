@@ -6,7 +6,7 @@ resource "aws_cloudwatch_event_rule" "fetch_grocery_prices" {
 
 resource "aws_cloudwatch_event_target" "fetch_grocery_prices_target" {
   rule = aws_cloudwatch_event_rule.fetch_grocery_prices.name
-  arn  = module.lambdas.search_grocery_prices_arn
+  arn  = module.lambdas.save_price_lambda_arn
 }
 
 resource "aws_lambda_permission" "cloudwatch_events_invoke" {
