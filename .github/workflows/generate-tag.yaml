@@ -39,7 +39,7 @@ jobs:
       - name: Generate image tag
         id: generate-tag
         env:
-          REPOSITORY: grocery-images
+          REPOSITORY: grocery-prices
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REGISTRY_ALIAS: e2q6m3r8
         run: |
