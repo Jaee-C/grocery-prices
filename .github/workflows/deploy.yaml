@@ -72,6 +72,10 @@ jobs:
           role-to-assume: ${{ vars.DEPLOYMENT_ROLE_ARN }}
           aws-region: ${{ inputs.aws-region }}
 
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
       - name: Terraform Apply
         id: apply
         working-directory: infra
