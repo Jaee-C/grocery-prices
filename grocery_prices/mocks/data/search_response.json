@@ -1,0 +1,402 @@
+[
+  {
+    "products":[
+      {
+        "index":0,
+        "display_name":"Lindt Excellence Dark Chocolate 70% Cocoa Block 100g",
+        "price":"5",
+        "size":"100G",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/19731/lindt-excellence-dark-chocolate-70-cocoa-block",
+        "code":"19731"
+      },
+      {
+        "index":1,
+        "display_name":"Lindt Excellence Dark Chocolate 85% Cocoa Block 100g",
+        "price":"5",
+        "size":"100G",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/201687/lindt-excellence-dark-chocolate-85-cocoa-block",
+        "code":"201687"
+      },
+      {
+        "index":2,
+        "display_name":"Lindt Excellence Extra Creamy Milk Chocolate Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/19752/lindt-excellence-extra-creamy-milk-chocolate-block",
+        "code":"19752"
+      },
+      {
+        "index":3,
+        "display_name":"Lindt Lindor Milk Chocolate Bar 38g",
+        "price":"1.25",
+        "size":"38G",
+        "price_per_unit":"$3.29 per 100g",
+        "is_on_special":true,
+        "label":"Half Price Save $1.25",
+        "url":"https://www.woolworths.com.au/shop/productdetails/760472/lindt-lindor-milk-chocolate-bar",
+        "code":"760472"
+      },
+      {
+        "index":4,
+        "display_name":"Lindt Excellence Sea Salt Dark Chocolate Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/346722/lindt-excellence-sea-salt-dark-chocolate-block",
+        "code":"346722"
+      },
+      {
+        "index":5,
+        "display_name":"Lindt Excellence Mint Intense Dark Chocolate Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/255080/lindt-excellence-mint-intense-dark-chocolate-block",
+        "code":"255080"
+      },
+      {
+        "index":6,
+        "display_name":"Lindt Excellence Dark Chocolate 70% Smooth Blend Cocoa Block 100g",
+        "price":"5",
+        "size":"100G",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/429457/lindt-excellence-dark-chocolate-70-smooth-blend-cocoa-block",
+        "code":"429457"
+      },
+      {
+        "index":7,
+        "display_name":"Lindt Excellence 90% Cocoa Dark Chocolate Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/789154/lindt-excellence-90-cocoa-dark-chocolate-block",
+        "code":"789154"
+      },
+      {
+        "index":8,
+        "display_name":"Lindt Excellence Sea Salt Caramel Dark Chocolate Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/797737/lindt-excellence-sea-salt-caramel-dark-chocolate-block",
+        "code":"797737"
+      },
+      {
+        "index":9,
+        "display_name":"Lindt Lindor Assorted Chocolate Gift Box 235g",
+        "price":"11",
+        "size":"235g",
+        "price_per_unit":"$4.68 per 100g",
+        "is_on_special":true,
+        "label":"Half Price Save $11.00",
+        "url":"https://www.woolworths.com.au/shop/productdetails/126395/lindt-lindor-assorted-chocolate-gift-box",
+        "code":"126395"
+      },
+      {
+        "index":10,
+        "display_name":"Lindt Excellence 78% Cocoa Dark Chocolate Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/574478/lindt-excellence-78-cocoa-dark-chocolate-block",
+        "code":"574478"
+      },
+      {
+        "index":11,
+        "display_name":"Lindt Excellence Dark Chocolate Orange Intense 100g Block",
+        "price":"5",
+        "size":"100G Block",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/217002/lindt-excellence-dark-chocolate-orange-intense",
+        "code":"217002"
+      },
+      {
+        "index":12,
+        "display_name":"Lindt Excellence Roasted Almond Dark Chocolate Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/324314/lindt-excellence-roasted-almond-dark-chocolate-block",
+        "code":"324314"
+      },
+      {
+        "index":13,
+        "display_name":"Lindt Excellence 95% Cocoa Dark Chocolate Block 80g",
+        "price":"5",
+        "size":"80g",
+        "price_per_unit":"$6.25 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/4758/lindt-excellence-95-cocoa-dark-chocolate-block",
+        "code":"4758"
+      },
+      {
+        "index":14,
+        "display_name":"Lindt Excellence Raspberry Intense Dark Chocolate Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/827470/lindt-excellence-raspberry-intense-dark-chocolate-block",
+        "code":"827470"
+      },
+      {
+        "index":15,
+        "display_name":"Lindt Lindor Milk Chocolate Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/20747/lindt-lindor-milk-chocolate-block",
+        "code":"20747"
+      },
+      {
+        "index":16,
+        "display_name":"Lindt Lindor Assorted Chocolate Bag 125g",
+        "price":"8",
+        "size":"125g",
+        "price_per_unit":"$6.40 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $2.00",
+        "url":"https://www.woolworths.com.au/shop/productdetails/249702/lindt-lindor-assorted-chocolate-bag",
+        "code":"249702"
+      },
+      {
+        "index":17,
+        "display_name":"Lindt Lindor 60% Cocoa Dark Chocolate Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/26493/lindt-lindor-60-cocoa-dark-chocolate-block",
+        "code":"26493"
+      },
+      {
+        "index":18,
+        "display_name":"Lindt Lindor Milk Chocolate Bag 125g",
+        "price":"8",
+        "size":"125g",
+        "price_per_unit":"$6.40 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $2.00",
+        "url":"https://www.woolworths.com.au/shop/productdetails/249701/lindt-lindor-milk-chocolate-bag",
+        "code":"249701"
+      },
+      {
+        "index":19,
+        "display_name":"Lindt Lindor Assorted Chocolate Box 333g",
+        "price":"18",
+        "size":"333g",
+        "price_per_unit":"$5.41 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $8.00",
+        "url":"https://www.woolworths.com.au/shop/productdetails/114683/lindt-lindor-assorted-chocolate-box",
+        "code":"114683"
+      },
+      {
+        "index":20,
+        "display_name":"Lindt Lindor Milk Chocolate Box 333g",
+        "price":"18",
+        "size":"333g",
+        "price_per_unit":"$5.41 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $8.00",
+        "url":"https://www.woolworths.com.au/shop/productdetails/114682/lindt-lindor-milk-chocolate-box",
+        "code":"114682"
+      },
+      {
+        "index":21,
+        "display_name":"Lindt Hot Chocolate Flakes Milk 210g",
+        "price":"10",
+        "size":"210G",
+        "price_per_unit":"$4.76 per 100g",
+        "is_on_special":false,
+        "label":"None",
+        "url":"https://www.woolworths.com.au/shop/productdetails/305554/lindt-hot-chocolate-flakes-milk",
+        "code":"305554"
+      },
+      {
+        "index":22,
+        "display_name":"Lindt Excellence Fig Intense Dark Chocolar Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/882057/lindt-excellence-fig-intense-dark-chocolar-block",
+        "code":"882057"
+      },
+      {
+        "index":23,
+        "display_name":"Lindt Excellence Sea Salt Caramel Milk Chocolate Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/574482/lindt-excellence-sea-salt-caramel-milk-chocolate-block",
+        "code":"574482"
+      },
+      {
+        "index":24,
+        "display_name":"Lindt Lindor Strawberries & Cream White Chocolate Bag 125g",
+        "price":"8",
+        "size":"125g",
+        "price_per_unit":"$6.40 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $2.00",
+        "url":"https://www.woolworths.com.au/shop/productdetails/781954/lindt-lindor-strawberries-cream-white-chocolate-bag",
+        "code":"781954"
+      },
+      {
+        "index":25,
+        "display_name":"Lindt Lindor White Chocolate Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/46223/lindt-lindor-white-chocolate-block",
+        "code":"46223"
+      },
+      {
+        "index":26,
+        "display_name":"Lindt No Sugar Added Milk Chocolate Block 100g",
+        "price":"7.5",
+        "size":"100g",
+        "price_per_unit":"$7.50 per 100g",
+        "is_on_special":false,
+        "label":"None",
+        "url":"https://www.woolworths.com.au/shop/productdetails/680447/lindt-no-sugar-added-milk-chocolate-block",
+        "code":"680447"
+      },
+      {
+        "index":27,
+        "display_name":"Lindt No Sugar Added Dark Chocolate Block 100g",
+        "price":"7.5",
+        "size":"100g",
+        "price_per_unit":"$7.50 per 100g",
+        "is_on_special":false,
+        "label":"None",
+        "url":"https://www.woolworths.com.au/shop/productdetails/680448/lindt-no-sugar-added-dark-chocolate-block",
+        "code":"680448"
+      },
+      {
+        "index":28,
+        "display_name":"Lindt Lindor 70% Cocoa Dark Chocolate Bag 123g",
+        "price":"8",
+        "size":"123g",
+        "price_per_unit":"$6.50 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $2.00",
+        "url":"https://www.woolworths.com.au/shop/productdetails/676647/lindt-lindor-70-cocoa-dark-chocolate-bag",
+        "code":"676647"
+      },
+      {
+        "index":29,
+        "display_name":"Lindt Excellence Salty Liquorice Dark Chocolate Block 100g",
+        "price":"None",
+        "size":"100g",
+        "price_per_unit":"None",
+        "is_on_special":false,
+        "label":"None",
+        "url":"https://www.woolworths.com.au/shop/productdetails/543554/lindt-excellence-salty-liquorice-dark-chocolate-block",
+        "code":"543554"
+      },
+      {
+        "index":30,
+        "display_name":"Lindt Lindor Easter Assorted Chocolate Mini Eggs Bag 300g",
+        "price":"15",
+        "size":"300g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"Half Price Save $15.00",
+        "url":"https://www.woolworths.com.au/shop/productdetails/970498/lindt-lindor-easter-assorted-chocolate-mini-eggs-bag",
+        "code":"970498"
+      },
+      {
+        "index":31,
+        "display_name":"Lindt Lindor Dark Assorted Chocolate Box 327g",
+        "price":"18",
+        "size":"327g",
+        "price_per_unit":"$5.50 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $8.00",
+        "url":"https://www.woolworths.com.au/shop/productdetails/108435/lindt-lindor-dark-assorted-chocolate-box",
+        "code":"108435"
+      },
+      {
+        "index":32,
+        "display_name":"Lindt Pralines Master Collection Chocolate Box 184g",
+        "price":"15",
+        "size":"184g",
+        "price_per_unit":"$8.15 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $9.00",
+        "url":"https://www.woolworths.com.au/shop/productdetails/132864/lindt-pralines-master-collection-chocolate-box",
+        "code":"132864"
+      },
+      {
+        "index":33,
+        "display_name":"Lindt Lindor Hazelnut Milk Chocolate Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/566949/lindt-lindor-hazelnut-milk-chocolate-block",
+        "code":"566949"
+      },
+      {
+        "index":34,
+        "display_name":"Lindt Easter Hen Milk Chocolate Eggs Bag 90g",
+        "price":"6",
+        "size":"90g",
+        "price_per_unit":"$6.67 per 100g",
+        "is_on_special":false,
+        "label":"None",
+        "url":"https://www.woolworths.com.au/shop/productdetails/809624/lindt-easter-hen-milk-chocolate-eggs-bag",
+        "code":"809624"
+      },
+      {
+        "index":35,
+        "display_name":"Lindt Lindor Milk Salted Caramel Chocolate Block 100g",
+        "price":"5",
+        "size":"100g",
+        "price_per_unit":"$5.00 per 100g",
+        "is_on_special":true,
+        "label":"On Special Save $1.50",
+        "url":"https://www.woolworths.com.au/shop/productdetails/285016/lindt-lindor-milk-salted-caramel-chocolate-block",
+        "code":"285016"
+      }
+    ]
+  }
+]

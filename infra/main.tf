@@ -24,4 +24,5 @@ module "lambdas" {
   source = "./lambdas"
 
   execution_role_arn = aws_iam_role.grocery_lambda_execution_role.arn
+  handler_prefix     = var.handler_prefix
 }
