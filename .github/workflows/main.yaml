@@ -12,6 +12,11 @@ jobs:
   build-and-test:
     uses: ./.github/workflows/build-and-test.yaml
 
+  sonarqube:
+    uses: ./.github/workflows/sonarqube.yaml
+    secrets:
+      SONAR_API_TOKEN: ${{ secrets.SONAR_API_TOKEN }}
+
   terraform-plan:
     permissions:
       id-token: write
