@@ -12,6 +12,10 @@ jobs:
   build-and-test:
     uses: ./.github/workflows/build-and-test.yaml
 
+  sonarqube:
+    uses: ./.github/workflows/sonarqube.yaml
+    secrets: inherit
+
   terraform-plan:
     permissions:
       id-token: write
