@@ -37,3 +37,11 @@ test("Search groceries returns a list of grocery items", async () => {
   expect(result[0].products).toHaveLength(1);
   expect(result[0].products[0].display_name).toBe("Lindt Excellence Dark Chocolate 70% Cocoa Block 100g");
 });
+
+test("Search groceries returns empty payload", async () => {
+  lambdaMock.on(InvokeCommand).resolves({})
+
+  const search = async () => await searchGroceries({ keyword: "chocolate" });
+
+  await expect(search).rejects.toThrow(Error);
+})
