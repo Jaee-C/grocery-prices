@@ -1,23 +1,27 @@
-name: "Grocery Prices Workflow"
+name: "Grocery Prices Lambda Workflow"
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'infra/**'
+      - '*/**.py'
+      - '!tests/**'
   pull_request:
     branches:
       - main
+    paths:
+      - 'infra/**'
+      - '*/**.py'
+
 
 jobs:
   build-and-test-lambda:
     uses: ./.github/workflows/build-and-test-lambda.yaml
 
-  build-and-test-ui:
-    uses: ./.github/workflows/build-and-test-ui.yaml
-
   sonarqube:
     uses: ./.github/workflows/sonarqube.yaml
-    needs: [build-and-test-ui]
     secrets: inherit
 
   terraform-plan:
