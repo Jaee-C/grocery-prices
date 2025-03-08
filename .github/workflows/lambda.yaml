@@ -29,7 +29,7 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write
-    needs: [build-and-test-lambda, build-and-test-ui]
+    needs: [build-and-test-lambda]
     uses: ./.github/workflows/terraform-plan.yaml
     with:
       environment: production
