@@ -65,37 +65,4 @@ describe("SearchGroceryForm", () => {
       expect(screen.getByText(/Lindt/i)).toBeInTheDocument()
     );
   });
-
-  it('should save selected grocery when clicking the Save button', async () => {
-    lambdaMock.on(InvokeCommand, { FunctionName: "search_grocery_prices" }).resolves({
-      StatusCode: 200,
-      Payload: Uint8ArrayBlobAdapter.fromString(JSON.stringify(sampleGroceryResponse))
-    })
-    lambdaMock.on(InvokeCommand, { FunctionName: "add_grocery_item" }).resolves({
-      StatusCode: 200
-    });
-
-    render(<SearchGroceryForm />)
-
-    const keywordField = screen.getByRole('textbox', { name: 'Search for groceries' });
-    const searchButton = screen.getByRole('button', { name: 'Search' });
-
-    fireEvent.change(keywordField, { target: { value: "test" } });
-    fireEvent.click(searchButton);
-
-    await waitFor(() =>
-      expect(screen.getByText(/Lindt/i)).toBeInTheDocument()
-    );
-
-    const saveButton = screen.getByRole('button', { name: 'Save' });
-
-    fireEvent.click(saveButton);
-
-    await waitFor(() =>
-      expect(lambdaMock).toHaveReceivedCommandWith(InvokeCommand, {
-        FunctionName: "add_grocery_item",
-        Payload: JSON.stringify({ code: "19731", merchant: "woolworths" })
-      })
-    );
-  });
 });

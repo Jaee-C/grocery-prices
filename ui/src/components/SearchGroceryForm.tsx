@@ -4,6 +4,7 @@ import { useActionState } from "react"
 import { searchGroceries } from "@/actions/searchGroceries"
 import { GrocerySearchResponse } from "@/models/grocery";
 import { trackGrocery } from "@/actions/trackGrocery";
+import SearchResultList from "@/components/SearchResultList";
 
 const initialState: GrocerySearchResponse[] = []
 
@@ -31,17 +32,7 @@ export default function SearchGroceryForm() {
       </form>
       {searchPending && <div>Searching...</div>}
       {!searchPending && state.length > 0 && (
-        <ul>
-          {state[0].products.map((grocery) => (
-            <li key={grocery.index}>
-              <a href={grocery.url} target="_blank" rel="noreferrer">
-                {grocery.display_name}
-              </a>
-              <div>A$ {grocery.price}</div>
-              <button type="submit" onClick={() => trackGrocery(grocery)}>Save</button>
-              </li>
-          ))}
-        </ul>
+        <SearchResultList products={state[0].products} />
       )}
     </>
   )
