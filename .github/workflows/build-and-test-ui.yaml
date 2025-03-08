@@ -37,4 +37,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jest-coverage
-          path: coverage/
+          path: ui/coverage/
