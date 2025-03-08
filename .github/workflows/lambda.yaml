@@ -1,16 +1,24 @@
-name: "Grocery Prices Workflow"
+name: "Grocery Prices Lambda Workflow"
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'infra/**'
+      - '*/**.py'
+      - '!tests/**'
   pull_request:
     branches:
       - main
+    paths:
+      - 'infra/**'
+      - '*/**.py'
+
 
 jobs:
-  build-and-test:
-    uses: ./.github/workflows/build-and-test.yaml
+  build-and-test-lambda:
+    uses: ./.github/workflows/build-and-test-lambda.yaml
 
   sonarqube:
     uses: ./.github/workflows/sonarqube.yaml
@@ -21,7 +29,7 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write
-    needs: build-and-test
+    needs: [build-and-test-lambda, build-and-test-ui]
     uses: ./.github/workflows/terraform-plan.yaml
     with:
       environment: production
