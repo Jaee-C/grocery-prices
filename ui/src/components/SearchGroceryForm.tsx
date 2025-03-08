@@ -3,7 +3,6 @@
 import { useActionState } from "react"
 import { searchGroceries } from "@/actions/searchGroceries"
 import { GrocerySearchResponse } from "@/models/grocery";
-import { trackGrocery } from "@/actions/trackGrocery";
 import SearchResultList from "@/components/SearchResultList";
 
 const initialState: GrocerySearchResponse[] = []
