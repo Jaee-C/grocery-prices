@@ -9,11 +9,15 @@ on:
       - main
 
 jobs:
-  build-and-test:
-    uses: ./.github/workflows/build-and-test.yaml
+  build-and-test-lambda:
+    uses: ./.github/workflows/build-and-test-lambda.yaml
+
+  build-and-test-ui:
+    uses: ./.github/workflows/build-and-test-ui.yaml
 
   sonarqube:
     uses: ./.github/workflows/sonarqube.yaml
+    needs: [build-and-test-ui]
     secrets: inherit
 
   terraform-plan:
@@ -21,7 +25,7 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write
-    needs: build-and-test
+    needs: [build-and-test-lambda, build-and-test-ui]
     uses: ./.github/workflows/terraform-plan.yaml
     with:
       environment: production

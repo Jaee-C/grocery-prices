@@ -14,7 +14,7 @@ export async function searchGroceries(query: GrocerySearchQuery): Promise<Grocer
   console.log(`Search groceries query returned with code ${response.StatusCode}`);
 
   if (response.Payload) {
-    return JSON.parse(new TextDecoder().decode(response.Payload)) as GrocerySearchResponse[];
+    return JSON.parse(Buffer.from(response.Payload).toString('utf8')) as GrocerySearchResponse[];
   } else {
     throw new Error("No payload returned from search groceries query");
   }
