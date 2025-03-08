@@ -2,7 +2,7 @@ import { mockClient } from "aws-sdk-client-mock";
 import { InvokeCommand, LambdaClient } from "@aws-sdk/client-lambda";
 import { Uint8ArrayBlobAdapter } from "@smithy/util-stream";
 
-import { searchGroceries } from "./search-groceries";
+import { searchGroceries, trackGroceryItem } from "./search-groceries";
 
 const lambdaMock = mockClient(LambdaClient);
 
@@ -45,3 +45,11 @@ test("Search groceries returns empty payload", async () => {
 
   await expect(search).rejects.toThrow(Error);
 })
+
+test("trackGroceryItem successful request", async () => {
+  lambdaMock.on(InvokeCommand).resolves({
+    StatusCode: 200
+  });
+
+  expect(async () => await trackGroceryItem({ code: "1000", "merchant": "wool" })).not.toThrow();
+});
