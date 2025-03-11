@@ -1,9 +1,14 @@
 import { InvokeCommand } from "@aws-sdk/client-lambda";
 
-import { GrocerySearchQuery, TrackGroceryQuery, GrocerySearchResponse } from "@/models/grocery";
+import {
+  GrocerySearchQuery,
+  TrackGroceryQuery,
+  GrocerySearchApiResponse,
+  GrocerySearchActionResponse
+} from "@/models/grocery";
 import { client } from "./client";
 
-export async function searchGroceries(query: GrocerySearchQuery): Promise<GrocerySearchResponse[]> {
+export async function searchGroceries(query: GrocerySearchQuery): Promise<GrocerySearchActionResponse> {
   const command = new InvokeCommand({
     FunctionName: "search_grocery_prices",
     Payload: JSON.stringify(query)
@@ -17,12 +22,20 @@ export async function searchGroceries(query: GrocerySearchQuery): Promise<Grocer
     const responseString = Buffer.from(response.Payload).toString('utf8');
 
     if (isLambdaTimeoutError(responseString)) {
-      throw new Error("Request timed out, please try again.");
+      return {
+        success: false,
+        message: "The search timed out. Please try again."
+      };
     }
-
-    return JSON.parse(responseString) as GrocerySearchResponse[];
+    return {
+      success: true,
+      results: JSON.parse(responseString) as GrocerySearchApiResponse[]
+    };
   } else {
-    throw new Error("No payload returned from search groceries query");
+    return {
+      success: false,
+      message: "No payload returned from search groceries query"
+    }
   }
 }
 

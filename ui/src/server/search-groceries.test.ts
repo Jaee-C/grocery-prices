@@ -33,25 +33,19 @@ test("Search groceries returns a list of grocery items", async () => {
 
   const result = await searchGroceries({ keyword: "chocolate" });
 
-  expect(result).toHaveLength(1);
-  expect(result[0].products).toHaveLength(1);
-  expect(result[0].products[0].display_name).toBe("Lindt Excellence Dark Chocolate 70% Cocoa Block 100g");
+  expect(result.success).toBeTruthy();
+  expect(result.results).toHaveLength(1);
+  expect(result.results![0].products).toHaveLength(1);
+  expect(result.results![0].products[0].display_name).toBe("Lindt Excellence Dark Chocolate 70% Cocoa Block 100g");
 });
 
 test("Search groceries returns empty payload", async () => {
   lambdaMock.on(InvokeCommand).resolves({})
 
-  const search = async () => await searchGroceries({ keyword: "chocolate" });
+  const result = await searchGroceries({ keyword: "chocolate" });
 
-  await expect(search).rejects.toThrow(Error);
-})
-
-test("trackGroceryItem successful request", async () => {
-  lambdaMock.on(InvokeCommand).resolves({
-    StatusCode: 200
-  });
-
-  expect(async () => await trackGroceryItem({ code: "1000", "merchant": "wool" })).not.toThrow();
+  expect(result.success).toBeFalsy();
+  expect(result.message).not.toBeNull();
 });
 
 test("trackGroceryItem timeout error", async () => {
@@ -63,7 +57,16 @@ test("trackGroceryItem timeout error", async () => {
     }))
   });
 
-  const search = async () => await searchGroceries({ keyword: "chocolate" });
+  const result = await searchGroceries({ keyword: "chocolate" });
 
-  await expect(search).rejects.toThrow(Error);
+  expect(result.success).toBeFalsy();
+  expect(result.message).not.toBeNull();
+});
+
+test("trackGroceryItem successful request", async () => {
+  lambdaMock.on(InvokeCommand).resolves({
+    StatusCode: 200
+  });
+
+  expect(async () => await trackGroceryItem({ code: "1000", "merchant": "wool" })).not.toThrow();
 });

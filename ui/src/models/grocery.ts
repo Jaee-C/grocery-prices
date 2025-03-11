@@ -7,8 +7,14 @@ export interface TrackGroceryQuery {
   merchant: string;
 }
 
-export interface GrocerySearchResponse {
+export interface GrocerySearchApiResponse {
   products: Grocery[];
+}
+
+export interface GrocerySearchActionResponse {
+  success: boolean;
+  message?: string;
+  results?: GrocerySearchApiResponse[];
 }
 
 export interface Grocery {

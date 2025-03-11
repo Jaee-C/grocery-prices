@@ -1,9 +1,9 @@
 'use server';
 
-import { GrocerySearchQuery, GrocerySearchResponse } from "@/models/grocery";
+import { GrocerySearchQuery, GrocerySearchActionResponse } from "@/models/grocery";
 import { searchGroceries as search } from "@/server/search-groceries";
 
-export async function searchGroceries(prevState: GrocerySearchResponse[],formData: FormData) {
+export async function searchGroceries(prevState: GrocerySearchActionResponse, formData: FormData) {
 
   const searchQuery: GrocerySearchQuery = {
     keyword: formData.get("keyword") as string
