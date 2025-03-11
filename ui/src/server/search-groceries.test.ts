@@ -33,18 +33,35 @@ test("Search groceries returns a list of grocery items", async () => {
 
   const result = await searchGroceries({ keyword: "chocolate" });
 
-  expect(result).toHaveLength(1);
-  expect(result[0].products).toHaveLength(1);
-  expect(result[0].products[0].display_name).toBe("Lindt Excellence Dark Chocolate 70% Cocoa Block 100g");
+  expect(result.success).toBeTruthy();
+  expect(result.results).toHaveLength(1);
+  expect(result.results![0].products).toHaveLength(1);
+  expect(result.results![0].products[0].display_name).toBe("Lindt Excellence Dark Chocolate 70% Cocoa Block 100g");
 });
 
 test("Search groceries returns empty payload", async () => {
   lambdaMock.on(InvokeCommand).resolves({})
 
-  const search = async () => await searchGroceries({ keyword: "chocolate" });
+  const result = await searchGroceries({ keyword: "chocolate" });
 
-  await expect(search).rejects.toThrow(Error);
-})
+  expect(result.success).toBeFalsy();
+  expect(result.message).not.toBeNull();
+});
+
+test("trackGroceryItem timeout error", async () => {
+  lambdaMock.on(InvokeCommand).resolves({
+    StatusCode: 200,
+    Payload: Uint8ArrayBlobAdapter.fromString(JSON.stringify({
+      "errorType":"Sandbox.Timedout",
+      "errorMessage":"RequestId: 6c14aac6-b810-49ce-9c6c-50104412d524 Error: Task timed out after 3.00 seconds"
+    }))
+  });
+
+  const result = await searchGroceries({ keyword: "chocolate" });
+
+  expect(result.success).toBeFalsy();
+  expect(result.message).not.toBeNull();
+});
 
 test("trackGroceryItem successful request", async () => {
   lambdaMock.on(InvokeCommand).resolves({

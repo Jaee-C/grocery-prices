@@ -2,10 +2,12 @@
 
 import { useActionState } from "react"
 import { searchGroceries } from "@/actions/searchGroceries"
-import { GrocerySearchResponse } from "@/models/grocery";
+import { GrocerySearchActionResponse } from "@/models/grocery";
 import SearchResultList from "@/components/SearchResultList";
 
-const initialState: GrocerySearchResponse[] = []
+const initialState: GrocerySearchActionResponse = {
+  success: true,
+};
 
 export default function SearchGroceryForm() {
   const [state, searchAction, searchPending] = useActionState(searchGroceries, initialState);
@@ -30,8 +32,10 @@ export default function SearchGroceryForm() {
         </button>
       </form>
       {searchPending && <div>Searching...</div>}
-      {!searchPending && state.length > 0 && (
-        <SearchResultList products={state[0].products} />
+      {!searchPending && !state.success && state.message && <div>{state.message}</div>}
+      {!searchPending && !state.success && !state.message && <div>Something went wrong, please try again later.</div>}
+      {!searchPending && state.success && state.results && state.results.length > 0 && (
+        <SearchResultList products={state.results[0].products} />
       )}
     </>
   )

@@ -1,9 +1,14 @@
 import { InvokeCommand } from "@aws-sdk/client-lambda";
 
-import { GrocerySearchQuery, TrackGroceryQuery, GrocerySearchResponse } from "@/models/grocery";
+import {
+  GrocerySearchQuery,
+  TrackGroceryQuery,
+  GrocerySearchApiResponse,
+  GrocerySearchActionResponse
+} from "@/models/grocery";
 import { client } from "./client";
 
-export async function searchGroceries(query: GrocerySearchQuery): Promise<GrocerySearchResponse[]> {
+export async function searchGroceries(query: GrocerySearchQuery): Promise<GrocerySearchActionResponse> {
   const command = new InvokeCommand({
     FunctionName: "search_grocery_prices",
     Payload: JSON.stringify(query)
@@ -14,9 +19,23 @@ export async function searchGroceries(query: GrocerySearchQuery): Promise<Grocer
   console.log(`Search groceries query returned with code ${response.StatusCode}`);
 
   if (response.Payload) {
-    return JSON.parse(Buffer.from(response.Payload).toString('utf8')) as GrocerySearchResponse[];
+    const responseString = Buffer.from(response.Payload).toString('utf8');
+
+    if (isLambdaTimeoutError(responseString)) {
+      return {
+        success: false,
+        message: "The search timed out. Please try again."
+      };
+    }
+    return {
+      success: true,
+      results: JSON.parse(responseString) as GrocerySearchApiResponse[]
+    };
   } else {
-    throw new Error("No payload returned from search groceries query");
+    return {
+      success: false,
+      message: "No payload returned from search groceries query"
+    }
   }
 }
 
@@ -29,4 +48,10 @@ export async function trackGroceryItem(query: TrackGroceryQuery): Promise<void> 
   const response = await client.send(command);
 
   console.log(`Track grocery item query returned with code ${response.StatusCode}`);
+}
+
+function isLambdaTimeoutError(lambdaResponse: string): boolean {
+  const response = JSON.parse(lambdaResponse);
+
+  return response.errorType === "Sandbox.Timedout";
 }
