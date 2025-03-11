@@ -6,7 +6,7 @@ interface Props {
   products: Grocery[];
 }
 
-export default function SearchResultList(props: Props) {
+export default function SearchResultList(props: Readonly<Props>) {
   return (
     <TableContainer>
       <Table sx={{ minWidth: 650 }} aria-label="groceries search result table">
