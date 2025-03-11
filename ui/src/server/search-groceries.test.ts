@@ -53,3 +53,17 @@ test("trackGroceryItem successful request", async () => {
 
   expect(async () => await trackGroceryItem({ code: "1000", "merchant": "wool" })).not.toThrow();
 });
+
+test("trackGroceryItem timeout error", async () => {
+  lambdaMock.on(InvokeCommand).resolves({
+    StatusCode: 200,
+    Payload: Uint8ArrayBlobAdapter.fromString(JSON.stringify({
+      "errorType":"Sandbox.Timedout",
+      "errorMessage":"RequestId: 6c14aac6-b810-49ce-9c6c-50104412d524 Error: Task timed out after 3.00 seconds"
+    }))
+  });
+
+  const search = async () => await searchGroceries({ keyword: "chocolate" });
+
+  await expect(search).rejects.toThrow(Error);
+});

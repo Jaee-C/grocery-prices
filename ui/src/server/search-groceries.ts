@@ -14,7 +14,13 @@ export async function searchGroceries(query: GrocerySearchQuery): Promise<Grocer
   console.log(`Search groceries query returned with code ${response.StatusCode}`);
 
   if (response.Payload) {
-    return JSON.parse(Buffer.from(response.Payload).toString('utf8')) as GrocerySearchResponse[];
+    const responseString = Buffer.from(response.Payload).toString('utf8');
+
+    if (isLambdaTimeoutError(responseString)) {
+      throw new Error("Request timed out, please try again.");
+    }
+
+    return JSON.parse(responseString) as GrocerySearchResponse[];
   } else {
     throw new Error("No payload returned from search groceries query");
   }
@@ -29,4 +35,10 @@ export async function trackGroceryItem(query: TrackGroceryQuery): Promise<void> 
   const response = await client.send(command);
 
   console.log(`Track grocery item query returned with code ${response.StatusCode}`);
+}
+
+function isLambdaTimeoutError(lambdaResponse: string): boolean {
+  const response = JSON.parse(lambdaResponse);
+
+  return response.errorType === "Sandbox.Timedout";
 }
