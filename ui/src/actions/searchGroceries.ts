@@ -1,4 +1,4 @@
-'use server';
+"use server";
 
 import { GrocerySearchQuery, GrocerySearchActionResponse } from "@/models/grocery";
 import { searchGroceries as search } from "@/server/search-groceries";

@@ -9,7 +9,7 @@ export const client = new LambdaClient({
   credentials: process.env.NODE_ENV === "production" ? awsCredentialsProvider({
     roleArn: AWS_ROLE_ARN,
   }) : {
-    accessKeyId: 'test',
-    secretAccessKey: 'test',
+    accessKeyId: "test",
+    secretAccessKey: "test",
   }
 });

@@ -10,13 +10,13 @@ import { useEffect } from "react";
  */
 export default function ColorScheme() {
   const { setMode } = useColorScheme();
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   useEffect(() => {
     if (prefersDarkMode) {
-      setMode('dark');
+      setMode("dark");
     } else {
-      setMode('light');
+      setMode("light");
     }
   }, [prefersDarkMode, setMode]);
   return null;

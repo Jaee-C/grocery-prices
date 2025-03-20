@@ -1,4 +1,4 @@
-'use server';
+"use server";
 
 import { Grocery, TrackGroceryQuery } from "@/models/grocery";
 import { trackGroceryItem } from "@/server/search-groceries";

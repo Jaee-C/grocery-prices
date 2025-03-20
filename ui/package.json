@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
@@ -19,6 +20,8 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.3",
     "@mui/material-nextjs": "^6.4.3",
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.49.1",
     "@vercel/functions": "^2.0.0",
     "next": "15.1.6",
     "react": "^19.0.0",
@@ -26,6 +29,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@stylistic/eslint-plugin-js": "^4.2.0",
     "@swc/core": "^1.11.8",
     "@swc/jest": "^0.2.37",
     "@testing-library/dom": "^10.4.0",

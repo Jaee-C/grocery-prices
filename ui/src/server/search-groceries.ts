@@ -19,7 +19,7 @@ export async function searchGroceries(query: GrocerySearchQuery): Promise<Grocer
   console.log(`Search groceries query returned with code ${response.StatusCode}`);
 
   if (response.Payload) {
-    const responseString = Buffer.from(response.Payload).toString('utf8');
+    const responseString = Buffer.from(response.Payload).toString("utf8");
 
     if (isLambdaTimeoutError(responseString)) {
       return {

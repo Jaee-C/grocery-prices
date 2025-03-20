@@ -26,14 +26,14 @@ beforeEach(() => {
 });
 
 describe("SearchResultList", () => {
-  it('should save selected grocery when clicking the Save button', async () => {
+  it("should save selected grocery when clicking the Save button", async () => {
     lambdaMock.on(InvokeCommand, { FunctionName: "add_grocery_item" }).resolves({
       StatusCode: 200
     });
 
     render(<SearchResultList products={sampleProductList} />)
 
-    const saveButton = screen.getByRole('button', { name: 'Save' });
+    const saveButton = screen.getByRole("button", { name: "Save" });
 
     fireEvent.click(saveButton);
 

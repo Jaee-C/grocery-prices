@@ -32,14 +32,14 @@ beforeEach(() => {
 });
 
 describe("SearchGroceryForm", () => {
-  it('should render search form', () => {
+  it("should render search form", () => {
     render(<SearchGroceryForm />);
 
     const searchForm = document.querySelector("form");
     expect(searchForm).toBeInTheDocument();
   });
 
-  it('should search groceries when form is submitted', async () => {
+  it("should search groceries when form is submitted", async () => {
     lambdaMock.on(InvokeCommand).resolves({
       StatusCode: 200,
       Payload: Uint8ArrayBlobAdapter.fromString(JSON.stringify(sampleGroceryResponse))
@@ -62,7 +62,7 @@ describe("SearchGroceryForm", () => {
     );
   });
 
-  it('should display error message when request timed out', async () => {
+  it("should display error message when request timed out", async () => {
     lambdaMock.on(InvokeCommand).resolves({
       StatusCode: 200,
       Payload: Uint8ArrayBlobAdapter.fromString(JSON.stringify({
@@ -86,8 +86,8 @@ describe("SearchGroceryForm", () => {
 });
 
 function searchGrocery() {
-  const keywordField = screen.getByRole('textbox', { name: 'Search for groceries' });
-  const searchButton = screen.getByRole('button', { name: 'Search' });
+  const keywordField = screen.getByRole("textbox", { name: "Search for groceries" });
+  const searchButton = screen.getByRole("button", { name: "Search" });
 
   fireEvent.change(keywordField, { target: { value: "test" } });
   fireEvent.click(searchButton);
