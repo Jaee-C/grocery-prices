@@ -29,7 +29,7 @@ test("Search groceries returns a list of grocery items", async () => {
         ]
       }
     ]))
-  })
+  });
 
   const result = await searchGroceries({ keyword: "chocolate" });
 
@@ -40,7 +40,7 @@ test("Search groceries returns a list of grocery items", async () => {
 });
 
 test("Search groceries returns empty payload", async () => {
-  lambdaMock.on(InvokeCommand).resolves({})
+  lambdaMock.on(InvokeCommand).resolves({});
 
   const result = await searchGroceries({ keyword: "chocolate" });
 

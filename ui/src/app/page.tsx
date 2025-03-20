@@ -6,11 +6,11 @@ import { createClient } from "@/utils/supabase/server";
 import SearchGroceryForm from "@/components/SearchGroceryForm";
 
 export default async function Home() {
-  const supabase = await createClient()
+  const supabase = await createClient();
 
-  const { data, error } = await supabase.auth.getUser()
+  const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
-    redirect("/login")
+    redirect("/login");
   }
 
   return (

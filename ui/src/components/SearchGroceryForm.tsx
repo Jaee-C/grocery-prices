@@ -1,7 +1,7 @@
 "use client";
 
-import { useActionState } from "react"
-import { searchGroceries } from "@/actions/searchGroceries"
+import { useActionState } from "react";
+import { searchGroceries } from "@/actions/searchGroceries";
 import { GrocerySearchActionResponse } from "@/models/grocery";
 import SearchResultList from "@/components/SearchResultList";
 
@@ -38,5 +38,5 @@ export default function SearchGroceryForm() {
         <SearchResultList products={state.results[0].products} />
       )}
     </>
-  )
+  );
 }

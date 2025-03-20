@@ -31,7 +31,7 @@ describe("SearchResultList", () => {
       StatusCode: 200
     });
 
-    render(<SearchResultList products={sampleProductList} />)
+    render(<SearchResultList products={sampleProductList} />);
 
     const saveButton = screen.getByRole("button", { name: "Save" });
 
@@ -44,4 +44,4 @@ describe("SearchResultList", () => {
       })
     );
   });
-})
+});

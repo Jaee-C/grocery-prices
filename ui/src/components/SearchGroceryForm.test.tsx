@@ -43,9 +43,9 @@ describe("SearchGroceryForm", () => {
     lambdaMock.on(InvokeCommand).resolves({
       StatusCode: 200,
       Payload: Uint8ArrayBlobAdapter.fromString(JSON.stringify(sampleGroceryResponse))
-    })
+    });
 
-    render(<SearchGroceryForm />)
+    render(<SearchGroceryForm />);
 
     searchGrocery();
 

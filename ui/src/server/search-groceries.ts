@@ -35,7 +35,7 @@ export async function searchGroceries(query: GrocerySearchQuery): Promise<Grocer
     return {
       success: false,
       message: "No payload returned from search groceries query"
-    }
+    };
   }
 }
 

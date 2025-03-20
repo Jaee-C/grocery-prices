@@ -19,7 +19,8 @@ const eslintConfig = [
   },
   {
     rules: {
-      "@stylistic/js/quotes": ["error", "double"]
+      "@stylistic/js/quotes": ["error", "double"],
+      "@stylistic/js/semi": ["error", "always"],
     }
   }
 ];
